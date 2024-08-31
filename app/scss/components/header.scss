@@ -1,0 +1,23 @@
+@use '../util' as *;
+
+.header {
+    margin-top: rem(36);
+    @include breakpoint(medium){ /* we only want grid for desktop */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__subtitle{
+        font-size: rem(14);
+        font-weight: 700; /* bold */
+        color: var(--dark-text1);
+    }
+
+    &__title{
+
+    }
+    &__toggle{
+
+    }
+}
