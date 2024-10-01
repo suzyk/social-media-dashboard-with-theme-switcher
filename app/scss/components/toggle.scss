@@ -1,27 +1,73 @@
 @use '../util' as *;
 
 .toggle {
+    display: grid;
+    grid-template-columns: 1fr 3rem;//repeat(3, 1fr);
     border: none;
+    margin: 0;
 
+    label {
+        font-size: rem(14);
+
+        &[for='dark']{
+            line-height: rem(24);
+            margin-right: rem(13);
+        }
+    }
     &__wrapper {
-
+        position:relative;
+        height: rem(24);
     }
 
-    input[type="radio"]{
+    input[type='radio']{
+        margin: 0 rem(-2) 0 rem(-2);
+        opacity: 0;
+        width: rem(20);
+        height: rem(24);
 
+        &:focus ~ .toggle__button{
+            border: 2px solid white;
+        }
     }
     
     &__background{
-
+        border-radius: rem(12);
+        display: block;
+        width: 100%;
+        height:100%;
+        position:absolute;
+        top:0;
+        overflow: hidden;
+        background: linear-gradient(225deg, var(--toggle-bg-end) 0%, var(--toggle-bg-start) 98.02%);
+        pointer-events: none; // so we can click radio buttons underneath
     }
     &__button {
-        width: rem(16);
-        height: rem(16);
+        position: absolute;
+        left:rem(3);
+        top:rem(3);
+        right:100%;
+        width: rem(18);
+        height: rem(18);
         border-radius: 50%;
-        background-color: var(--toggle-light);
+        background-color: var(--dark-bg);
+        transition: all 150ms ease-in-out;
     }
+    #light:checked ~ .toggle__button{ // ~ means sibling
+        left: calc(100% - 21px); // button 18px+3px margin
+        right: 3px;
+    }
+    #system:checked ~ .toggle__button{ // ~ means sibling
+        left: 50%;
+        right: auto;
+        transform: translate(-50%); // pushes button right in the center
+    }
+}
 
-    label {
-        
-    }
+.visually-hidden {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
